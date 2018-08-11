@@ -45,8 +45,13 @@ Code that uses the calibration files of the WILDTRACK dataset, and the OpenCV li
 *WILDTRACK: A Multi-Camera HD Dataset for Dense Unscripted Pedestrian Detection*. *Tatjana Chavdarova, Pierre Baqué, Stéphane Bouquet, Andrii Maksai, Cijo Jose, Timur Bagautdinov, Louis Lettry, Pascal Fua, Luc Van Gool, François Fleuret*. The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018, pp. 5030-5039
 <http://openaccess.thecvf.com/content_cvpr_2018/html/Chavdarova_WILDTRACK_A_Multi-Camera_CVPR_2018_paper.html>
 
+
 ## License
 Copyright (c) 2008 [Idiap Research Institute](http://www.idiap.ch/).
 
 > *GNU GENERAL PUBLIC LICENSE*, Version 3, 29 June 2007.
 WILDTRACK toolkit is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation. WILDTRACK toolkit is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with WILDTRACK toolkit. If not, see <http://www.gnu.org/licenses/>.
+
+
+## See also
+- [Multi Camera Calibration Suite](https://github.com/idiap/multicamera-calibration) 
