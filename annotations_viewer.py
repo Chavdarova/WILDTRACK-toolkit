@@ -211,16 +211,16 @@ class AnnotationsViewer:
             print('Found %d files in: %s.' % (len(self.ann_filenames), _opt.dir_annotations))
             print('Loaded %d multi-view annotations.' %
                   sum([sum([1 for _ in read_json(f)]) for f in self.ann_filenames]))
-
+        self.n_rows = 2
+        self.n_columns = math.ceil((self.n_views + 1) / self.n_rows)
         self._load_and_draw_rect()
 
         # Set-up canvas
         self.canvas = Canvas(_gui,
-                             width=((self.n_views + 1) // 2 * self.im_width),
-                             height=2 * self.im_height)
+                             width=((self.n_views + 1) // self.n_rows * self.im_width),
+                             height=self.n_rows * self.im_height)
         self.frames_on_canvas = []
-        self.n_columns = math.ceil((self.n_views + 1) / 2)
-        for row in range(2):
+        for row in range(self.n_rows):
             for column in range(self.n_columns):
                 if row*self.n_columns + column >= self.n_views:
                     break
@@ -230,7 +230,7 @@ class AnnotationsViewer:
                 self.frames_on_canvas.append(frame_on_canvas)
         # frame for navigation
         self.navigate_frame = Canvas(_gui, width=self.im_width, height=self.im_height)
-        self.navigate_frame.grid(row=1, column=self.n_columns-1)
+        self.navigate_frame.grid(row=self.n_rows-1, column=self.n_columns-1)
         # buttons for navigation
         self.prevBtn = Button(self.navigate_frame, text='<', command=lambda: self._on_button(-1))
         self.prevBtn.grid(row=0, column=0)
@@ -297,11 +297,13 @@ class AnnotationsViewer:
 
             if self.im_height is None or self.im_width is None:
                 # determine display size per image, s.t. the aspect ratio is maintained
-                _im_width, _im_height, _ = frame.shape
+                _im_height, _im_width, _ = frame.shape
                 _screen_width = gui.winfo_screenwidth()
                 _screen_height = gui.winfo_screenheight()
-                _width_downscale_factor = _im_width / _screen_width * (self.n_views + 1) / 2
-                _height_downscale_factor = _im_height * 2 / _screen_height
+                _width_downscale_factor = _im_width * self.n_columns / (
+                    _screen_width - (self.n_columns + 1) * 5)
+                _height_downscale_factor = _im_height * self.n_rows / (
+                    _screen_height - (self.n_rows + 1) * 5)
                 _downscale_factor = max([_width_downscale_factor, _height_downscale_factor])
                 self.im_height = int(_im_height / _downscale_factor)
                 self.im_width = int(_im_width / _downscale_factor)
@@ -312,7 +314,7 @@ class AnnotationsViewer:
                     cv2.rectangle(frame, (bbox['xmin'], bbox['ymin']), (bbox['xmax'], bbox['ymax']),
                                   (255, 0, 0), 2)
             frame = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-            frame = frame.resize((self.im_height, self.im_width), Image.ANTIALIAS)
+            frame = frame.resize((self.im_width, self.im_height), Image.ANTIALIAS)
             self.corresponding_frames[view] = ImageTk.PhotoImage(frame)
 
         if self._verbose:
@@ -375,8 +377,8 @@ def parse_args():
     parser.add_argument('--fr_ext', type=str, default='.png',
                         help='extension of the frames, default: %(default)s')
     _opt = parser.parse_args()
-    assert os.path.exists(_opt.dir_annotations), "Directory not found: %s." % opt.dir_annotations
-    assert os.path.exists(_opt.dir_frames), "Directory not found: %s." % opt.dir_frames
+    assert os.path.exists(_opt.dir_annotations), "Directory not found: %s." % _opt.dir_annotations
+    assert os.path.exists(_opt.dir_frames), "Directory not found: %s." % _opt.dir_frames
     return _opt
 
 
