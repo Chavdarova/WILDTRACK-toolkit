@@ -33,7 +33,7 @@ Use `$ source deactivate` when done.
 
 ## 2. Camera calibration - example code
 Code that uses the calibration files of the WILDTRACK dataset, and the OpenCV library.
-`intersecting_area.py` draws the area considered for annotating the persons, in the WILDTRACK dataset, which lies approximately in the intersection between the fields of view of the seven cameras. Primarily, it generates 3D points on the ground plane (z-axis is 0) using a grid of size 1440 $$\times$$ 480, origin at (-300,  -90,    0) in centimeters (cm), with a step/offset of 2.5 cm for both the axis. It then projects these points in each view. Finally, it stores the marked frames in the given output directory. 
+`intersecting_area.py` draws the area considered for annotating the persons, in the WILDTRACK dataset, which lies approximately in the intersection between the fields of view of the seven cameras. Primarily, it generates 3D points on the ground plane (z-axis is 0) using a grid of size 1440x480, origin at (-300,  -90,    0) in centimeters (cm), with a step/offset of 2.5 cm for both the axis. It then projects these points in each view. Finally, it stores the marked frames in the given output directory. 
  Run: `python intersecting_area.py --help` for details.
 
 ### Dependencies
