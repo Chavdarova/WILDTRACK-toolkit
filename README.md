@@ -1,5 +1,5 @@
 # WILDTRACK-toolkit
-Tools accompanying the [WILDTRACK](https://cvlab.epfl.ch/data/wildtrack) multi-camera dataset.
+Tools accompanying the [WILDTRACK](https://www.epfl.ch/labs/cvlab/data/data-wildtrack/) multi-camera dataset.
 
 ## 1. WILDTRACK annotations viewer
 Graphical User Interface (GUI) illustration of the *WILDTRACK* dataset annotations. The script `annotations_viewer.py` draws the annotations for each of the views and displays the synchronized frames simultaneously. 
