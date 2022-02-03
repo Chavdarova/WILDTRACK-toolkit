@@ -55,3 +55,4 @@ WILDTRACK toolkit is free software: you can redistribute it and/or modify it und
 
 ## See also
 - [Multi Camera Calibration Suite](https://github.com/idiap/multicamera-calibration) 
+- [Annotation tool](https://github.com/cvlab-epfl/multicam-gt)
